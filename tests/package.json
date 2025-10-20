@@ -1,0 +1,26 @@
+{
+  "name": "ctf-tests",
+  "version": "1.0.0",
+  "description": "Test suite for COVID Health Misinformation CTF",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/run-all-tests.js",
+    "test:flags": "node tests/flag_verification.test.js",
+    "test:dataset": "node tests/dataset_validation.test.js",
+    "test:accessibility": "node tests/accessibility.test.js"
+  },
+  "keywords": [
+    "ctf",
+    "testing",
+    "accessibility",
+    "validation"
+  ],
+  "author": "CTF Development Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge - COVID Health Misinformation CTF</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="index.html" class="back-link" aria-label="Back to challenges list">← Back to Challenges</a>
+        </nav>
+        <h1 id="challenge-title">Loading Challenge...</h1>
+    </header>
+
+    <main role="main">
+        <!-- Harmful Content Warning (hidden by default) -->
+        <div id="harmful-content-warning" class="harmful-warning" role="alert" aria-live="assertive" style="display: none;">
+            <h2>⚠️ HARMFUL CONTENT WARNING</h2>
+            <p>This challenge contains potentially harmful health advice. <strong>DO NOT attempt any health advice found in this scenario.</strong></p>
+            <p>If you encounter dangerous medical advice, mark it as HARMFUL_CONTENT and explain why it is dangerous. Always consult verified medical sources like <a href="https://www.cdc.gov" target="_blank" rel="noopener">CDC</a> or <a href="https://www.who.int" target="_blank" rel="noopener">WHO</a>.</p>
+            <button id="acknowledge-warning" class="btn btn-warning">I Understand - Continue</button>
+        </div>
+
+        <!-- Challenge Content -->
+        <div id="challenge-content" style="display: none;">
+            <section class="challenge-info">
+                <div class="challenge-meta">
+                    <span class="difficulty" id="challenge-difficulty"></span>
+                    <span class="type" id="challenge-type"></span>
+                </div>
+                <div class="learning-objective">
+                    <h3>Learning Objective</h3>
+                    <p id="objective-text"></p>
+                </div>
+            </section>
+
+            <section class="challenge-prompt">
+                <h2>Challenge</h2>
+                <div id="prompt-content"></div>
+            </section>
+
+            <section class="challenge-assets" id="assets-section" style="display: none;">
+                <h3>Assets</h3>
+                <div id="assets-container"></div>
+            </section>
+
+            <section class="flag-submission">
+                <h3>Submit Your Answer</h3>
+                <form id="flag-form" role="form" aria-label="Flag submission form">
+                    <label for="flag-input" class="visually-hidden">Enter your flag</label>
+                    <input 
+                        type="text" 
+                        id="flag-input" 
+                        placeholder="flag{your_answer_here}" 
+                        aria-describedby="flag-help"
+                        required
+                    >
+                    <button type="submit" class="btn btn-primary">Submit Flag</button>
+                    <div id="flag-help" class="help-text">Enter your flag in the format: flag{your_answer}</div>
+                </form>
+                <div id="submission-result" role="status" aria-live="polite"></div>
+            </section>
+
+            <section class="hints-section">
+                <h3>Hints</h3>
+                <div id="hints-container">
+                    <p class="hint-instruction">Submit an incorrect answer to reveal hints</p>
+                </div>
+            </section>
+
+            <section class="challenge-tags">
+                <h3>Tags</h3>
+                <div id="tags-container"></div>
+            </section>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading" role="status" aria-live="polite">
+            Loading challenge...
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error" role="alert" style="display: none;">
+            <h2>Error Loading Challenge</h2>
+            <p id="error-message"></p>
+            <a href="index.html" class="btn btn-primary">Return to Challenges</a>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 COVID Health Misinformation CTF. Educational use only.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
