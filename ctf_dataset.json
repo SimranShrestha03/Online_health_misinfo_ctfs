@@ -4,7 +4,95 @@
     "description": "25 scenarios (10 original + 15 advanced) for graduate students to detect and analyze COVID/health misinformation.",
     "author": "Abhishek Shah (generated via Cursor prompt)",
     "created_at": "2025-01-20",
-    "source_reference": "CTF Scenarios for COVID Misinfo - Original 10 scenarios from provided document"
+    "source_reference": "CTF Scenarios for COVID Misinfo - Original 10 scenarios from provided document",
+    "version": "2.0.0",
+    "operations": [
+      {
+        "id": 1,
+        "name": "Orientation",
+        "description": "Master the fundamentals of misinformation detection",
+        "challenges": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Signal vs. Noise",
+        "description": "Distinguish credible sources from manipulation",
+        "challenges": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Statistical Traps",
+        "description": "Navigate the minefield of data manipulation",
+        "challenges": [
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Manipulated Media",
+        "description": "Detect visual and multimedia deception",
+        "challenges": [
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Adversarial Systems",
+        "description": "Combat algorithmic amplification and AI manipulation",
+        "challenges": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      }
+    ],
+    "safety_banner": "⚠️ HARMFUL CONTENT WARNING: This challenge contains potentially harmful health advice. DO NOT attempt any health advice found in this scenario. If you encounter dangerous medical advice, mark it as HARMFUL_CONTENT and explain why it is dangerous. Always consult verified medical sources.",
+    "links": {
+      "cdc_url": "https://www.cdc.gov",
+      "who_url": "https://www.who.int",
+      "factcheck_url": "https://www.factcheck.org"
+    },
+    "strings": {
+      "mission_brief": "Welcome, Agent. The digital landscape has become a battlefield where misinformation spreads faster than truth. Your mission: develop the critical thinking skills needed to identify, analyze, and counter health misinformation in all its forms.",
+      "operation_complete": "Operation Complete! Your intelligence has been invaluable. Prepare for the next phase of your mission.",
+      "ctf_complete": "🎉 MISSION ACCOMPLISHED! You have successfully completed all operations and proven yourself a master of misinformation detection.",
+      "hint_cost": "Hints cost points: First (-2), Second (-5), Third (-10)",
+      "timer_bonus": "Time bonus: +10% if solved within 10 minutes without hints",
+      "submit_locked": "Submit locked for 1 second to prevent brute force",
+      "badge_earned": "Badge Earned!",
+      "streak_milestone": "Streak Milestone!",
+      "perfect_solve": "Perfect Solve! No hints used.",
+      "graduate_slayer": "Graduate Slayer! All graduate challenges completed."
+    },
+    "operation_blurbs": [
+      "Welcome to your first operation, Agent. Here you'll learn the fundamental techniques of misinformation detection. Master these basics - they'll serve you throughout your mission.",
+      "Excellent work on the basics. Now you'll face more sophisticated manipulation techniques. Learn to distinguish signal from noise in the information landscape.",
+      "You're ready for advanced statistical manipulation. These challenges will test your ability to detect data manipulation and statistical traps that mislead audiences.",
+      "Visual and multimedia manipulation is the next frontier. Learn to detect deepfakes, edited content, and visual deception techniques.",
+      "Your final test: combat algorithmic amplification and AI-generated misinformation. This is where the future of misinformation detection lies."
+    ]
   },
   "challenges": [
     {
@@ -14,7 +102,9 @@
       "difficulty": "medium",
       "learning_objective": "Detect visual and axis manipulation in charts.",
       "prompt_text": "A chart claims that 'COVID cases dropped to zero after people drank herbal tea.' Examine the chart and identify the misleading element(s). Upload reasoning and point to the axis or manipulation.",
-      "assets": ["fake_graph_v1.png"],
+      "assets": [
+        "fake_graph_v1.png"
+      ],
       "hints": [
         "Look at the Y-axis starting value.",
         "Check for truncation or uneven intervals on the axis.",
@@ -22,8 +112,16 @@
       ],
       "flag": "flag{misleading_graph}",
       "explanation": "The Y-axis is truncated (does not start at zero), exaggerating the decline—this is a common visual manipulation.",
-      "tags": ["visual_misinfo", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "visual_misinfo",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 2,
+      "operation": 1,
+      "salt": "challenge_1_salt_2025",
+      "storedHash": null
     },
     {
       "id": 2,
@@ -32,7 +130,9 @@
       "difficulty": "medium",
       "learning_objective": "Understand why popularity is not evidence and how to check claims.",
       "prompt_text": "A celebrity's tweet states: 'COVID is fake—5G towers are making people sick!' Inspect the tweet metadata cues and source credibility.",
-      "assets": ["celeb_tweet.png"],
+      "assets": [
+        "celeb_tweet.png"
+      ],
       "hints": [
         "Popularity (likes/retweets) does not equal veracity.",
         "Search for peer-reviewed evidence on 5G and biological harm.",
@@ -40,8 +140,16 @@
       ],
       "flag": "flag{5g_conspiracy}",
       "explanation": "No credible scientific evidence links 5G to COVID; tweet is conspiracy and popularity is not proof.",
-      "tags": ["conspiracy", "source_criticism"],
-      "safety": "safe"
+      "tags": [
+        "conspiracy",
+        "source_criticism"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 3,
+      "operation": 1,
+      "salt": "challenge_2_salt_2025",
+      "storedHash": null
     },
     {
       "id": 3,
@@ -50,7 +158,9 @@
       "difficulty": "medium",
       "learning_objective": "Verify expert credentials and quote authenticity.",
       "prompt_text": "A blog post quotes 'Dr. Sarah Johnson, Harvard epidemiologist' saying 'masks don't work.' Verify the expert's credentials and the quote's authenticity.",
-      "assets": ["expert_quote.png"],
+      "assets": [
+        "expert_quote.png"
+      ],
       "hints": [
         "Search for Dr. Sarah Johnson at Harvard School of Public Health.",
         "Check if the quote appears in any peer-reviewed publications.",
@@ -58,8 +168,16 @@
       ],
       "flag": "flag{fake_expert}",
       "explanation": "Dr. Sarah Johnson does not exist at Harvard; the quote is fabricated to lend false credibility to anti-mask claims.",
-      "tags": ["source_criticism", "expertise"],
-      "safety": "safe"
+      "tags": [
+        "source_criticism",
+        "expertise"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 4,
+      "operation": 1,
+      "salt": "challenge_3_salt_2025",
+      "storedHash": null
     },
     {
       "id": 4,
@@ -68,7 +186,9 @@
       "difficulty": "easy",
       "learning_objective": "Distinguish between correlation and causation in headlines.",
       "prompt_text": "Headline: 'Areas with more COVID testing have higher case counts.' Identify the logical fallacy and explain what additional data would be needed to establish causation.",
-      "assets": ["headline_screenshot.png"],
+      "assets": [
+        "headline_screenshot.png"
+      ],
       "hints": [
         "Consider what 'more testing' might actually indicate.",
         "Think about the relationship between testing availability and case detection.",
@@ -76,8 +196,16 @@
       ],
       "flag": "flag{correlation_causation}",
       "explanation": "This confuses correlation with causation. More testing leads to more case detection, not necessarily more actual cases. Need randomized testing data to establish causation.",
-      "tags": ["logical_fallacy", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "logical_fallacy",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 10,
+      "nextId": 5,
+      "operation": 1,
+      "salt": "challenge_4_salt_2025",
+      "storedHash": null
     },
     {
       "id": 5,
@@ -86,7 +214,9 @@
       "difficulty": "easy",
       "learning_objective": "Recognize the importance of information currency in health guidance.",
       "prompt_text": "A social media post from March 2020 claims 'WHO says masks are not recommended for the general public.' Evaluate this claim considering the date and subsequent guidance updates.",
-      "assets": ["outdated_post.png"],
+      "assets": [
+        "outdated_post.png"
+      ],
       "hints": [
         "Check when WHO guidance on masks changed.",
         "Consider the evolution of scientific understanding over time.",
@@ -94,8 +224,16 @@
       ],
       "flag": "flag{outdated_guidance}",
       "explanation": "Early WHO guidance was based on limited evidence. By June 2020, WHO recommended masks in public settings. This post uses outdated information to mislead.",
-      "tags": ["information_currency", "source_criticism"],
-      "safety": "safe"
+      "tags": [
+        "information_currency",
+        "source_criticism"
+      ],
+      "safety": "safe",
+      "points": 10,
+      "nextId": 6,
+      "operation": 1,
+      "salt": "challenge_5_salt_2025",
+      "storedHash": null
     },
     {
       "id": 6,
@@ -104,7 +242,9 @@
       "difficulty": "medium",
       "learning_objective": "Identify selective data presentation that misleads.",
       "prompt_text": "A chart shows only 3 countries where mask mandates were followed by case increases. Identify what's missing from this analysis and what additional data would provide a complete picture.",
-      "assets": ["cherry_picked_chart.png"],
+      "assets": [
+        "cherry_picked_chart.png"
+      ],
       "hints": [
         "Consider how many countries have mask mandates globally.",
         "Think about the time periods being compared.",
@@ -112,8 +252,16 @@
       ],
       "flag": "flag{cherry_picked}",
       "explanation": "This ignores the majority of countries where mask mandates were followed by case decreases. The analysis is biased by selecting only countries that fit the desired narrative.",
-      "tags": ["data_manipulation", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "data_manipulation",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 7,
+      "operation": 2,
+      "salt": "challenge_6_salt_2025",
+      "storedHash": null
     },
     {
       "id": 7,
@@ -122,7 +270,9 @@
       "difficulty": "medium",
       "learning_objective": "Recognize false equivalence between scientific and non-scientific sources.",
       "prompt_text": "A post claims 'Both sides of the mask debate have valid points—some doctors say yes, some say no.' Analyze this false equivalence and identify the scientific consensus.",
-      "assets": ["false_equivalence.png"],
+      "assets": [
+        "false_equivalence.png"
+      ],
       "hints": [
         "Consider the difference between individual opinions and scientific consensus.",
         "Look at systematic reviews and meta-analyses on mask effectiveness.",
@@ -130,8 +280,16 @@
       ],
       "flag": "flag{false_equivalence}",
       "explanation": "Scientific consensus strongly supports mask effectiveness. The 'both sides' argument creates false equivalence between evidence-based medicine and anecdotal opinions.",
-      "tags": ["logical_fallacy", "scientific_consensus"],
-      "safety": "safe"
+      "tags": [
+        "logical_fallacy",
+        "scientific_consensus"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 8,
+      "operation": 2,
+      "salt": "challenge_7_salt_2025",
+      "storedHash": null
     },
     {
       "id": 8,
@@ -140,7 +298,9 @@
       "difficulty": "hard",
       "learning_objective": "Identify statistical manipulation and misleading presentations.",
       "prompt_text": "A chart shows '99.7% survival rate' for COVID without context. Calculate the actual risk and identify what information is missing to properly interpret this statistic.",
-      "assets": ["misleading_stats.png"],
+      "assets": [
+        "misleading_stats.png"
+      ],
       "hints": [
         "Consider what 0.3% mortality means in absolute numbers.",
         "Think about the difference between individual risk and population impact.",
@@ -148,8 +308,16 @@
       ],
       "flag": "flag{missing_context}",
       "explanation": "0.3% mortality means 1 in 333 people die, which is significant. The statistic ignores long-term health effects, healthcare system capacity, and the exponential nature of viral spread.",
-      "tags": ["statistics", "risk_communication"],
-      "safety": "safe"
+      "tags": [
+        "statistics",
+        "risk_communication"
+      ],
+      "safety": "safe",
+      "points": 30,
+      "nextId": 9,
+      "operation": 2,
+      "salt": "challenge_8_salt_2025",
+      "storedHash": null
     },
     {
       "id": 9,
@@ -158,7 +326,9 @@
       "difficulty": "medium",
       "learning_objective": "Recognize emotional manipulation techniques in health misinformation.",
       "prompt_text": "A post shows a crying child with text 'They're forcing masks on our babies!' Identify the emotional manipulation techniques and explain why this approach is problematic for health communication.",
-      "assets": ["emotional_manipulation.png"],
+      "assets": [
+        "emotional_manipulation.png"
+      ],
       "hints": [
         "Consider how emotional imagery can override rational evaluation.",
         "Think about the difference between emotional appeals and evidence-based arguments.",
@@ -166,8 +336,16 @@
       ],
       "flag": "flag{emotional_appeal}",
       "explanation": "This uses emotional manipulation (fear, parental concern) to override scientific evidence. Multiple studies show masks are safe for children and effective at reducing transmission.",
-      "tags": ["emotional_manipulation", "child_safety"],
-      "safety": "safe"
+      "tags": [
+        "emotional_manipulation",
+        "child_safety"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 10,
+      "operation": 2,
+      "salt": "challenge_9_salt_2025",
+      "storedHash": null
     },
     {
       "id": 10,
@@ -176,7 +354,9 @@
       "difficulty": "hard",
       "learning_objective": "Identify and deconstruct conspiracy thinking patterns.",
       "prompt_text": "A post claims 'Big Pharma created COVID to sell vaccines and make billions.' Analyze this conspiracy theory using the criteria for identifying conspiracy thinking and explain why it's implausible.",
-      "assets": ["conspiracy_post.png"],
+      "assets": [
+        "conspiracy_post.png"
+      ],
       "hints": [
         "Consider the coordination required for such a global conspiracy.",
         "Think about the scientific evidence for COVID's natural origin.",
@@ -184,8 +364,16 @@
       ],
       "flag": "flag{conspiracy_thinking}",
       "explanation": "This conspiracy theory requires impossible coordination among thousands of scientists globally. Scientific evidence strongly supports COVID's natural origin, and pharmaceutical companies face massive financial risks from vaccine development.",
-      "tags": ["conspiracy_theory", "critical_thinking"],
-      "safety": "safe"
+      "tags": [
+        "conspiracy_theory",
+        "critical_thinking"
+      ],
+      "safety": "safe",
+      "points": 30,
+      "nextId": 11,
+      "operation": 2,
+      "salt": "challenge_10_salt_2025",
+      "storedHash": null
     },
     {
       "id": 11,
@@ -194,7 +382,9 @@
       "difficulty": "graduate",
       "learning_objective": "Detect misuse of unreviewed preprints and identify methodological flaws.",
       "prompt_text": "A preprint claims 'Hydroxychloroquine reduces COVID mortality by 50%' based on a study of 30 patients. Analyze the sample size, p-values, and potential conflicts of interest. Identify what makes this claim unreliable.",
-      "assets": ["preprint_paper.pdf"],
+      "assets": [
+        "preprint_paper.pdf"
+      ],
       "hints": [
         "Consider statistical power with n=30 for mortality outcomes.",
         "Look for p-hacking or multiple comparisons issues.",
@@ -202,8 +392,17 @@
       ],
       "flag": "flag{unchecked_preprint}",
       "explanation": "Sample size of 30 is insufficient for mortality outcomes (would need ~1000+ patients). No correction for multiple comparisons. Authors have financial ties to hydroxychloroquine manufacturers. Preprint bypasses peer review.",
-      "tags": ["preprint_abuse", "statistics", "conflict_of_interest"],
-      "safety": "safe"
+      "tags": [
+        "preprint_abuse",
+        "statistics",
+        "conflict_of_interest"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 12,
+      "operation": 3,
+      "salt": "challenge_11_salt_2025",
+      "storedHash": null
     },
     {
       "id": 12,
@@ -212,7 +411,9 @@
       "difficulty": "graduate",
       "learning_objective": "Detect video manipulation through context analysis and source verification.",
       "prompt_text": "A 30-second clip shows a scientist saying 'masks are ineffective.' Find the full source video (provide URL) and identify what context was removed that changes the meaning of the statement.",
-      "assets": ["selective_clip.mp4"],
+      "assets": [
+        "selective_clip.mp4"
+      ],
       "hints": [
         "Use reverse video search tools to find the original.",
         "Look for video metadata and timestamps.",
@@ -220,8 +421,16 @@
       ],
       "flag": "flag{clip_out_of_context}",
       "explanation": "The full video shows the scientist discussing mask effectiveness in specific high-risk medical settings, not general public use. The clip was edited to remove the qualifying context about different risk levels.",
-      "tags": ["video_manipulation", "context_analysis"],
-      "safety": "safe"
+      "tags": [
+        "video_manipulation",
+        "context_analysis"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 13,
+      "operation": 3,
+      "salt": "challenge_12_salt_2025",
+      "storedHash": null
     },
     {
       "id": 13,
@@ -230,7 +439,9 @@
       "difficulty": "graduate",
       "learning_objective": "Distinguish correlation from causation and identify confounding variables.",
       "prompt_text": "A timeline chart shows 'Areas with mask mandates had higher COVID rates.' Identify the confounding variables and propose what additional data would be needed to establish a causal relationship.",
-      "assets": ["causality_chart.png"],
+      "assets": [
+        "causality_chart.png"
+      ],
       "hints": [
         "Consider when mask mandates were implemented relative to case surges.",
         "Think about population density, testing rates, and other interventions.",
@@ -238,8 +449,17 @@
       ],
       "flag": "flag{false_causality}",
       "explanation": "Key confounders: mask mandates implemented during case surges, not before. Need data on: timing of mandate vs. case trends, population density, testing rates, other NPIs. Would need natural experiment or RCT to establish causation.",
-      "tags": ["causal_inference", "confounding", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "causal_inference",
+        "confounding",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 14,
+      "operation": 3,
+      "salt": "challenge_13_salt_2025",
+      "storedHash": null
     },
     {
       "id": 14,
@@ -248,7 +468,9 @@
       "difficulty": "graduate",
       "learning_objective": "Apply multimedia forensics to detect synthetic media.",
       "prompt_text": "A video appears to show Dr. Anthony Fauci saying 'COVID was created in a lab.' List at least 3 forensic indicators of manipulation and locate the original source video.",
-      "assets": ["deepfake_fauci.mp4"],
+      "assets": [
+        "deepfake_fauci.mp4"
+      ],
       "hints": [
         "Check lip-sync accuracy and natural blinking patterns.",
         "Look for audio-visual inconsistencies and compression artifacts.",
@@ -256,8 +478,16 @@
       ],
       "flag": "flag{deepfake_detected}",
       "explanation": "Forensic indicators: 1) Unnatural lip-sync timing, 2) Missing eye blinks, 3) Audio-visual desync, 4) Compression artifacts around mouth region. Original source: Fauci discussing lab safety protocols, not COVID origin.",
-      "tags": ["deepfake_detection", "multimedia_forensics"],
-      "safety": "safe"
+      "tags": [
+        "deepfake_detection",
+        "multimedia_forensics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 15,
+      "operation": 3,
+      "salt": "challenge_14_salt_2025",
+      "storedHash": null
     },
     {
       "id": 15,
@@ -266,7 +496,9 @@
       "difficulty": "graduate",
       "learning_objective": "Critically evaluate meta-analyses for publication bias and methodological issues.",
       "prompt_text": "A blog misquotes a meta-analysis claiming 'Ivermectin reduces COVID mortality by 60%.' Fetch the DOI, read the methods section, and explain how publication bias and inclusion criteria may have altered the conclusions.",
-      "assets": ["meta_analysis_blog.png"],
+      "assets": [
+        "meta_analysis_blog.png"
+      ],
       "hints": [
         "Find the original meta-analysis using the DOI provided.",
         "Examine inclusion/exclusion criteria and study quality assessment.",
@@ -274,8 +506,17 @@
       ],
       "flag": "flag{meta_analysis_twist}",
       "explanation": "The meta-analysis included low-quality studies and had significant publication bias (funnel plot asymmetry). When only high-quality RCTs are included, the effect disappears. The blog cherry-picked the most favorable result.",
-      "tags": ["meta_analysis", "publication_bias", "systematic_review"],
-      "safety": "safe"
+      "tags": [
+        "meta_analysis",
+        "publication_bias",
+        "systematic_review"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 16,
+      "operation": 3,
+      "salt": "challenge_15_salt_2025",
+      "storedHash": null
     },
     {
       "id": 16,
@@ -284,7 +525,9 @@
       "difficulty": "medium",
       "learning_objective": "Conduct credential verification and identify false expertise claims.",
       "prompt_text": "A person claiming to be 'Dr. Michael Chen, Harvard Medical School' states that 'vaccines cause autism.' Conduct a credential audit: verify the person's academic credentials and identify any mismatches.",
-      "assets": ["false_authority.png"],
+      "assets": [
+        "false_authority.png"
+      ],
       "hints": [
         "Search Harvard Medical School faculty directory.",
         "Check if the person's credentials match their claimed expertise.",
@@ -292,8 +535,17 @@
       ],
       "flag": "flag{false_authority}",
       "explanation": "Dr. Michael Chen has a PhD in English Literature, not medicine. He has no medical training or expertise in immunology. His claims about vaccine-autism links contradict extensive scientific evidence.",
-      "tags": ["credential_verification", "expertise", "source_criticism"],
-      "safety": "safe"
+      "tags": [
+        "credential_verification",
+        "expertise",
+        "source_criticism"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 17,
+      "operation": 4,
+      "salt": "challenge_16_salt_2025",
+      "storedHash": null
     },
     {
       "id": 17,
@@ -302,7 +554,9 @@
       "difficulty": "graduate",
       "learning_objective": "Understand how algorithmic recommendation systems create echo chambers.",
       "prompt_text": "Collect five screenshots of an algorithmic feed (Twitter/TikTok) showing echo chamber effects. Explain how recommendation algorithms created this filter bubble and what interventions could break the cycle.",
-      "assets": ["echo_chamber_screenshots.png"],
+      "assets": [
+        "echo_chamber_screenshots.png"
+      ],
       "hints": [
         "Look for patterns in recommended content and user interactions.",
         "Consider how engagement metrics drive algorithmic decisions.",
@@ -310,8 +564,17 @@
       ],
       "flag": "flag{echo_chamber}",
       "explanation": "Algorithmic feeds prioritize engagement over accuracy, creating echo chambers by showing users content similar to what they've previously engaged with. This amplifies confirmation bias and reduces exposure to diverse viewpoints.",
-      "tags": ["algorithmic_amplification", "echo_chamber", "recommendation_systems"],
-      "safety": "safe"
+      "tags": [
+        "algorithmic_amplification",
+        "echo_chamber",
+        "recommendation_systems"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 18,
+      "operation": 4,
+      "salt": "challenge_17_salt_2025",
+      "storedHash": null
     },
     {
       "id": 18,
@@ -320,7 +583,9 @@
       "difficulty": "graduate",
       "learning_objective": "Apply base-rate fallacy concepts to health statistics.",
       "prompt_text": "An infographic shows '50% of COVID deaths were in vaccinated people' without providing base rates. Calculate the actual risk reduction and explain why this statistic is misleading without proper context.",
-      "assets": ["base_rate_infographic.png"],
+      "assets": [
+        "base_rate_infographic.png"
+      ],
       "hints": [
         "Consider the proportion of vaccinated vs. unvaccinated people in the population.",
         "Calculate attack rates for each group.",
@@ -328,8 +593,17 @@
       ],
       "flag": "flag{base_rate_fallacy}",
       "explanation": "If 80% of population is vaccinated, then 50% of deaths being vaccinated actually shows vaccines work (20% of population having 50% of deaths means unvaccinated have 5x higher death rate). Need to calculate relative risk reduction.",
-      "tags": ["base_rate_fallacy", "statistics", "risk_communication"],
-      "safety": "safe"
+      "tags": [
+        "base_rate_fallacy",
+        "statistics",
+        "risk_communication"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 19,
+      "operation": 4,
+      "salt": "challenge_18_salt_2025",
+      "storedHash": null
     },
     {
       "id": 19,
@@ -338,7 +612,9 @@
       "difficulty": "graduate",
       "learning_objective": "Identify visual design biases that mislead in data visualization.",
       "prompt_text": "An infographic shows COVID case counts using area-encoded circles but lacks axis labels and uses misleading scaling. Redraw the chart correctly and explain how the design bias affects interpretation.",
-      "assets": ["biased_infographic.png"],
+      "assets": [
+        "biased_infographic.png"
+      ],
       "hints": [
         "Check if the area encoding is proportional to the data values.",
         "Look for missing axis labels, scales, and data sources.",
@@ -346,8 +622,17 @@
       ],
       "flag": "flag{graphic_bias}",
       "explanation": "The chart uses area encoding but circles are scaled by diameter, not area (area = πr²). Missing axis labels make interpretation impossible. Correct version should use linear scaling with proper labels and data sources.",
-      "tags": ["data_visualization", "design_bias", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "data_visualization",
+        "design_bias",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 20,
+      "operation": 4,
+      "salt": "challenge_19_salt_2025",
+      "storedHash": null
     },
     {
       "id": 20,
@@ -356,7 +641,9 @@
       "difficulty": "medium",
       "learning_objective": "Distinguish between anecdotal evidence and systematic data.",
       "prompt_text": "A viral post claims 'My 25-year-old daughter died from the vaccine' with emotional details. Using only public records (obituaries, news reports), verify the claim and explain why anecdotal evidence is insufficient for causal claims.",
-      "assets": ["emotional_post.png"],
+      "assets": [
+        "emotional_post.png"
+      ],
       "hints": [
         "Search public obituary databases and news archives.",
         "Look for official cause of death information.",
@@ -364,8 +651,17 @@
       ],
       "flag": "flag{emotional_appeal}",
       "explanation": "Public records show the person died from a pre-existing heart condition, not vaccine-related causes. Temporal association (vaccine followed by death) does not equal causation. Systematic data shows vaccines are safe with rare serious side effects.",
-      "tags": ["anecdotal_evidence", "causal_inference", "source_verification"],
-      "safety": "safe"
+      "tags": [
+        "anecdotal_evidence",
+        "causal_inference",
+        "source_verification"
+      ],
+      "safety": "safe",
+      "points": 20,
+      "nextId": 21,
+      "operation": 4,
+      "salt": "challenge_20_salt_2025",
+      "storedHash": null
     },
     {
       "id": 21,
@@ -374,7 +670,10 @@
       "difficulty": "graduate",
       "learning_objective": "Identify p-hacking and multiple comparisons issues in data analysis.",
       "prompt_text": "You are given synthetic_study.csv and a Python notebook analysis.ipynb claiming a significant treatment effect (p=0.02). Run the notebook, re-run the tests adding a pre-specified set of covariates, and show whether the effect remains significant after controlling for confounders. In your answer upload a one-paragraph summary and the output cell showing the new p-value.",
-      "assets": ["synthetic_study.csv", "analysis.ipynb"],
+      "assets": [
+        "synthetic_study.csv",
+        "analysis.ipynb"
+      ],
       "hints": [
         "Check distribution of treatment groups.",
         "Look for omitted variable bias.",
@@ -382,8 +681,18 @@
       ],
       "flag": "flag{reproduce_check}",
       "explanation": "The original analysis ignored age and comorbidities. After controlling for these confounders, the treatment effect becomes non-significant (p=0.23). This demonstrates the importance of controlling for confounding variables in observational studies.",
-      "tags": ["reproducibility", "p_hacking", "confounding", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "reproducibility",
+        "p_hacking",
+        "confounding",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 22,
+      "operation": 5,
+      "salt": "challenge_21_salt_2025",
+      "storedHash": null
     },
     {
       "id": 22,
@@ -392,7 +701,9 @@
       "difficulty": "graduate",
       "learning_objective": "Identify and correct for sampling bias in survey research.",
       "prompt_text": "A survey screenshot claims 'majority oppose masks' but the sampling frame is a Facebook group of anti-mask users. Compute weighting adjustments or design a better sampling scheme that would provide representative results.",
-      "assets": ["biased_survey.png"],
+      "assets": [
+        "biased_survey.png"
+      ],
       "hints": [
         "Consider the difference between convenience sampling and probability sampling.",
         "Think about demographic weighting and post-stratification.",
@@ -400,8 +711,17 @@
       ],
       "flag": "flag{sampling_bias}",
       "explanation": "The survey suffers from severe selection bias. A representative sample would require random sampling from the general population, stratified by demographics. The current sample is self-selected and not generalizable.",
-      "tags": ["sampling_bias", "survey_methodology", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "sampling_bias",
+        "survey_methodology",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 23,
+      "operation": 5,
+      "salt": "challenge_22_salt_2025",
+      "storedHash": null
     },
     {
       "id": 23,
@@ -410,7 +730,9 @@
       "difficulty": "graduate",
       "learning_objective": "Apply causal inference methods to identify confounding variables.",
       "prompt_text": "A dataset shows 'areas with more masks had higher case counts.' Build a DAG (Directed Acyclic Graph), identify confounders (population density, testing rates), and propose a causal analysis approach using instrumental variables or natural experiments.",
-      "assets": ["confounding_dataset.csv"],
+      "assets": [
+        "confounding_dataset.csv"
+      ],
       "hints": [
         "Draw a DAG showing the relationship between masks, cases, and confounders.",
         "Consider what variables might be instruments for mask usage.",
@@ -418,8 +740,18 @@
       ],
       "flag": "flag{confounding}",
       "explanation": "DAG shows: Population density → Mask usage → Case counts, and Population density → Case counts directly. Key confounders: density, testing rates, socioeconomic status. Natural experiment: mask mandate timing variation across jurisdictions.",
-      "tags": ["causal_inference", "confounding", "DAG", "instrumental_variables"],
-      "safety": "safe"
+      "tags": [
+        "causal_inference",
+        "confounding",
+        "DAG",
+        "instrumental_variables"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 24,
+      "operation": 5,
+      "salt": "challenge_23_salt_2025",
+      "storedHash": null
     },
     {
       "id": 24,
@@ -428,7 +760,9 @@
       "difficulty": "graduate",
       "learning_objective": "Apply multiple comparison corrections to prevent false discoveries.",
       "prompt_text": "A blogger reports 1 of 30 subgroups had p<0.05 and claims 'significant effect'. Apply Bonferroni and BH corrections; report both corrected p-values and conclude whether the claim stands.",
-      "assets": ["p_hacking_results.png"],
+      "assets": [
+        "p_hacking_results.png"
+      ],
       "hints": [
         "Bonferroni: multiply p by number of tests.",
         "BH: use FDR ranking algorithm.",
@@ -436,8 +770,17 @@
       ],
       "flag": "flag{p_hack_exposed}",
       "explanation": "Original p=0.03. Bonferroni corrected p=0.03×30=0.90 (not significant). BH corrected p=0.15 (not significant). The claim does not stand after multiple comparison correction. This is a classic case of p-hacking.",
-      "tags": ["p_hacking", "multiple_comparisons", "statistics"],
-      "safety": "safe"
+      "tags": [
+        "p_hacking",
+        "multiple_comparisons",
+        "statistics"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": 25,
+      "operation": 5,
+      "salt": "challenge_24_salt_2025",
+      "storedHash": null
     },
     {
       "id": 25,
@@ -446,7 +789,9 @@
       "difficulty": "graduate",
       "learning_objective": "Critically evaluate AI model performance metrics and identify evaluation flaws.",
       "prompt_text": "An AI model claims 98% accuracy identifying 'fake' health posts. Provided confusion matrix: [[950, 50],[45, 5]]. Compute precision, recall, F1, and discuss class imbalance impact. Recommend an appropriate metric for this use case.",
-      "assets": ["ai_model_results.png"],
+      "assets": [
+        "ai_model_results.png"
+      ],
       "hints": [
         "Precision = TP/(TP+FP).",
         "Recall = TP/(TP+FN).",
@@ -454,8 +799,17 @@
       ],
       "flag": "flag{xai_critique}",
       "explanation": "Precision=5/(5+50)=0.0909, Recall=5/(5+45)=0.1, F1=0.095. The 98% accuracy is misleading due to class imbalance (95% negative class). For this use case, F1-score or balanced accuracy would be more appropriate metrics.",
-      "tags": ["AI_evaluation", "class_imbalance", "machine_learning"],
-      "safety": "safe"
+      "tags": [
+        "AI_evaluation",
+        "class_imbalance",
+        "machine_learning"
+      ],
+      "safety": "safe",
+      "points": 50,
+      "nextId": null,
+      "operation": 5,
+      "salt": "challenge_25_salt_2025",
+      "storedHash": null
     }
   ],
   "assets": [
@@ -490,4 +844,3 @@
   "security_notes": "Flags should be hashed using SHA-256 with random salts before storage. For client-side verification, include salt in JavaScript (obfuscation only). For true security, use serverless functions for flag verification. Never commit plaintext flags to version control. Rate limit flag submission endpoints to prevent brute force attacks.",
   "accessibility_and_ethics": "Include content warnings for HARMFUL_CONTENT challenges with links to CDC/WHO resources. Provide alt text for all images. Ensure keyboard navigation and screen reader compatibility. Include moderation guidelines and reporting mechanisms. For any scenario involving real people, use only synthetic or publicly available de-identified data."
 }
-

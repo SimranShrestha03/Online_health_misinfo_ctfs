@@ -1,0 +1,12 @@
+// Example pepper.js file for enhanced security
+// Copy this file to pepper.js and customize the pepper value
+// DO NOT commit pepper.js to version control
+
+const PEPPER = 'your_secure_pepper_string_here_2025';
+
+// Export the pepper for use in flag verification
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = PEPPER;
+} else {
+    window.PEPPER = PEPPER;
+}

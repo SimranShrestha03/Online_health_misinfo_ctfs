@@ -3,46 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COVID Health Misinformation CTF</title>
+    <title>Health Misinformation CTF</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header role="banner">
-        <h1>COVID Health Misinformation CTF</h1>
-        <p class="subtitle">Graduate-level challenges in detecting and analyzing health misinformation</p>
-    </header>
-
-    <main role="main">
-        <section class="intro">
-            <h2>About This CTF</h2>
-            <p>This Capture The Flag (CTF) exercise presents 25 scenarios designed to help graduate students develop critical thinking skills for identifying and analyzing COVID-19 and health misinformation. Each challenge requires you to apply statistical reasoning, source criticism, multimedia forensics, or algorithmic literacy.</p>
-            
-            <div class="warning-box" role="alert">
-                <h3>⚠️ Content Warning</h3>
-                <p>Some challenges contain potentially harmful health advice or misinformation. These are marked with <strong>HARMFUL_CONTENT</strong> warnings. Do not attempt any health advice found in these scenarios. Always consult verified medical sources like CDC or WHO.</p>
+    <div class="cyber-background"></div>
+    
+    <div class="container">
+        <header class="hero-section">
+            <div class="logo">
+                <h1 class="cyber-title">
+                    <span class="glitch" data-text="HEALTH">HEALTH</span>
+                    <span class="cyber-subtitle">MISINFO CTF</span>
+                </h1>
             </div>
-        </section>
-
-        <section class="challenges-section">
-            <h2>Challenges</h2>
-            <div id="challenges-container" role="list" aria-label="List of CTF challenges">
-                <div class="loading" role="status" aria-live="polite">Loading challenges...</div>
+            <div class="tagline">
+                <span class="terminal-prompt">$</span>
+                <span class="typing-text">Detect. Analyze. Defend.</span>
             </div>
-        </section>
+        </header>
 
-        <section class="leaderboard-section">
-            <h2>Leaderboard</h2>
-            <div id="leaderboard-container">
-                <p>Complete challenges to appear on the leaderboard!</p>
+        <main class="main-content">
+            <section class="story-section">
+                <div class="story-card">
+                    <h2 class="story-title">Mission Brief</h2>
+                    <div class="story-content">
+                        <p class="story-text">
+                            <span class="highlight">Welcome, Agent.</span> The digital landscape has become a battlefield where misinformation spreads faster than truth. Your mission: develop the critical thinking skills needed to identify, analyze, and counter health misinformation in all its forms.
+                        </p>
+                        <p class="story-text">
+                            You'll face <strong>25 challenges</strong> designed to test your ability to detect visual manipulation, verify sources, apply statistical reasoning, and recognize algorithmic amplification. Each challenge builds your arsenal of detection techniques.
+                        </p>
+                        <p class="story-text">
+                            <span class="warning-text">⚠️ Some scenarios contain harmful content for educational purposes only.</span> Your job is to identify the manipulation, not reproduce it. Always consult verified medical sources.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Challenges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">500</div>
+                        <div class="stat-label">Max Points</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Difficulty Levels</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="start-section">
+                <div class="player-setup" id="player-setup">
+                    <h3>Enter Your Callsign</h3>
+                    <div class="input-group">
+                        <input type="text" id="player-name" placeholder="Agent_Alpha" maxlength="20" class="cyber-input">
+                        <button id="start-ctf" class="cyber-button primary">
+                            <span class="button-text">BEGIN MISSION</span>
+                            <span class="button-glow"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="continue-section" id="continue-section" style="display: none;">
+                    <h3>Welcome Back, <span id="welcome-name"></span></h3>
+                    
+                    <!-- Progress Overview -->
+                    <div class="progress-overview">
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Operation</span>
+                                <span class="stat-value" id="current-operation">1</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Challenge</span>
+                                <span class="stat-value" id="current-challenge">1</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Score</span>
+                                <span class="stat-value" id="current-score">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Streak</span>
+                                <span class="stat-value" id="current-streak">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges Preview -->
+                    <div class="badges-preview" id="badges-preview">
+                        <h4>Recent Badges</h4>
+                        <div class="badges-grid" id="recent-badges">
+                            <!-- Badges will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Session Recap -->
+                    <div class="session-recap" id="session-recap" style="display: none;">
+                        <h4>Last Session</h4>
+                        <div class="recap-stats" id="recap-stats">
+                            <!-- Recap will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="continue-ctf" class="cyber-button primary">
+                            <span class="button-text">CONTINUE MISSION</span>
+                            <span class="button-glow"></span>
+                        </button>
+                        <button id="new-game-plus" class="cyber-button secondary">
+                            <span class="button-text">NEW GAME+</span>
+                        </button>
+                        <button id="reset-ctf" class="cyber-button danger">
+                            <span class="button-text">RESET</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Operations Preview -->
+            <section class="operations-preview" id="operations-preview">
+                <h3>Mission Operations</h3>
+                <div class="operations-grid" id="operations-grid">
+                    <!-- Operations will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Badges Drawer -->
+            <section class="badges-drawer" id="badges-drawer" style="display: none;">
+                <h3>Badge Collection</h3>
+                <div class="badges-collection" id="badges-collection">
+                    <!-- All badges will be populated by JavaScript -->
+                </div>
+                <button id="close-badges" class="cyber-button secondary">
+                    <span class="button-text">CLOSE</span>
+                </button>
+            </section>
+
+            <section class="leaderboard-section" id="leaderboard-section" style="display: none;">
+                <h3>Top Agents</h3>
+                <div id="leaderboard-container" class="leaderboard-grid">
+                    <!-- Leaderboard will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Health Misinformation CTF. Educational use only.</p>
+                <div class="footer-links">
+                    <a href="#" id="show-badges" class="footer-link">Badges</a>
+                    <a href="#" id="show-leaderboard" class="footer-link">Leaderboard</a>
+                    <a href="#" id="admin-access" class="footer-link">Admin</a>
+                </div>
             </div>
-        </section>
-    </main>
-
-    <footer role="contentinfo">
-        <p>&copy; 2025 COVID Health Misinformation CTF. Educational use only.</p>
-        <p><a href="admin.html" class="admin-link">Admin Access</a></p>
-    </footer>
+        </footer>
+    </div>
 
     <script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>

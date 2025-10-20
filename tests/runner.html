@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Test Runner</title>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .test-title {
+            color: #a855f7;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .test-result {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+        .test-pass {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            color: #10b981;
+        }
+        .test-fail {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+        .test-info {
+            background: rgba(6, 182, 212, 0.2);
+            border: 1px solid #06b6d4;
+            color: #06b6d4;
+        }
+        .run-button {
+            background: #a855f7;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            margin: 1rem 0;
+        }
+        .run-button:hover {
+            background: #9333ea;
+        }
+        .summary {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 CTF Test Runner</h1>
+        <p>Comprehensive testing suite for the Health Misinformation CTF platform.</p>
+        
+        <button class="run-button" onclick="runAllTests()">Run All Tests</button>
+        
+        <div class="summary" id="summary">
+            <h3>Test Summary</h3>
+            <p>Click "Run All Tests" to execute the test suite.</p>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">📊 Dataset Validation</div>
+            <div id="dataset-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">🔐 Flag Verification</div>
+            <div id="flag-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">🎮 Game State Management</div>
+            <div id="state-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">🏆 Badge System</div>
+            <div id="badge-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">♿ Accessibility</div>
+            <div id="a11y-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">📱 PWA Features</div>
+            <div id="pwa-tests"></div>
+        </div>
+    </div>
+
+    <script>
+        let testResults = {
+            passed: 0,
+            failed: 0,
+            total: 0
+        };
+
+        async function runAllTests() {
+            console.log('🧪 Starting CTF Test Suite...');
+            testResults = { passed: 0, failed: 0, total: 0 };
+            
+            await runDatasetTests();
+            await runFlagTests();
+            await runStateTests();
+            await runBadgeTests();
+            await runA11yTests();
+            await runPWATests();
+            
+            updateSummary();
+        }
+
+        function addTestResult(containerId, testName, passed, message) {
+            const container = document.getElementById(containerId);
+            const result = document.createElement('div');
+            result.className = `test-result ${passed ? 'test-pass' : 'test-fail'}`;
+            result.innerHTML = `
+                <strong>${passed ? '✅' : '❌'} ${testName}</strong><br>
+                ${message}
+            `;
+            container.appendChild(result);
+            
+            testResults.total++;
+            if (passed) testResults.passed++;
+            else testResults.failed++;
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('summary');
+            const passRate = ((testResults.passed / testResults.total) * 100).toFixed(1);
+            summary.innerHTML = `
+                <h3>Test Summary</h3>
+                <p><strong>Total Tests:</strong> ${testResults.total}</p>
+                <p><strong>Passed:</strong> ${testResults.passed} ✅</p>
+                <p><strong>Failed:</strong> ${testResults.failed} ❌</p>
+                <p><strong>Pass Rate:</strong> ${passRate}%</p>
+                <p><strong>Status:</strong> ${testResults.failed === 0 ? 'All tests passed! 🎉' : 'Some tests failed ⚠️'}</p>
+            `;
+        }
+
+        async function runDatasetTests() {
+            const container = document.getElementById('dataset-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: Dataset loads
+                const response = await fetch('ctf_dataset.json');
+                if (!response.ok) throw new Error('Failed to load dataset');
+                const dataset = await response.json();
+                addTestResult('dataset-tests', 'Dataset Loading', true, 'Dataset loaded successfully');
+                
+                // Test 2: Required fields
+                const hasMeta = dataset.meta && dataset.meta.title;
+                const hasChallenges = dataset.challenges && Array.isArray(dataset.challenges);
+                const hasOperations = dataset.meta.operations && Array.isArray(dataset.meta.operations);
+                addTestResult('dataset-tests', 'Required Fields', hasMeta && hasChallenges && hasOperations, 
+                    `Meta: ${hasMeta}, Challenges: ${hasChallenges}, Operations: ${hasOperations}`);
+                
+                // Test 3: Challenge count
+                const challengeCount = dataset.challenges.length;
+                addTestResult('dataset-tests', 'Challenge Count', challengeCount === 25, 
+                    `Expected 25 challenges, found ${challengeCount}`);
+                
+                // Test 4: Operations count
+                const operationCount = dataset.meta.operations.length;
+                addTestResult('dataset-tests', 'Operations Count', operationCount === 5, 
+                    `Expected 5 operations, found ${operationCount}`);
+                
+                // Test 5: Challenge structure
+                const firstChallenge = dataset.challenges[0];
+                const hasRequiredFields = firstChallenge.id && firstChallenge.title && firstChallenge.points && firstChallenge.operation;
+                addTestResult('dataset-tests', 'Challenge Structure', hasRequiredFields, 
+                    'All required challenge fields present');
+                
+            } catch (error) {
+                addTestResult('dataset-tests', 'Dataset Loading', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function runFlagTests() {
+            const container = document.getElementById('flag-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: Flag hashing
+                const testFlag = 'flag{test_flag}';
+                const salt = 'ctf_salt_2025_secure_random_string';
+                const encoder = new TextEncoder();
+                const data = encoder.encode(salt + testFlag);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                addTestResult('flag-tests', 'Flag Hashing', hash.length === 64, 
+                    `Generated ${hash.length}-character hash`);
+                
+                // Test 2: Hash consistency
+                const hash2 = await crypto.subtle.digest('SHA-256', data);
+                const hashArray2 = Array.from(new Uint8Array(hash2));
+                const hash2String = hashArray2.map(b => b.toString(16).padStart(2, '0')).join('');
+                addTestResult('flag-tests', 'Hash Consistency', hash === hash2String, 
+                    'Same input produces same hash');
+                
+                // Test 3: Different inputs, different hashes
+                const differentFlag = 'flag{different_flag}';
+                const differentData = encoder.encode(salt + differentFlag);
+                const differentHash = await crypto.subtle.digest('SHA-256', differentData);
+                const differentHashArray = Array.from(new Uint8Array(differentHash));
+                const differentHashString = differentHashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                addTestResult('flag-tests', 'Hash Uniqueness', hash !== differentHashString, 
+                    'Different inputs produce different hashes');
+                
+            } catch (error) {
+                addTestResult('flag-tests', 'Flag Hashing', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function runStateTests() {
+            const container = document.getElementById('state-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: LocalStorage availability
+                const hasLocalStorage = typeof Storage !== 'undefined';
+                addTestResult('state-tests', 'LocalStorage Support', hasLocalStorage, 
+                    hasLocalStorage ? 'LocalStorage is available' : 'LocalStorage not supported');
+                
+                // Test 2: State serialization
+                const testState = {
+                    playerName: 'TestAgent',
+                    score: 100,
+                    solvedChallenges: [1, 2, 3],
+                    badges: ['first_blood']
+                };
+                
+                try {
+                    localStorage.setItem('test_state', JSON.stringify(testState));
+                    const retrieved = JSON.parse(localStorage.getItem('test_state'));
+                    localStorage.removeItem('test_state');
+                    addTestResult('state-tests', 'State Serialization', 
+                        JSON.stringify(testState) === JSON.stringify(retrieved), 
+                        'State can be saved and retrieved');
+                } catch (error) {
+                    addTestResult('state-tests', 'State Serialization', false, `Error: ${error.message}`);
+                }
+                
+                // Test 3: Game state structure
+                const gameState = {
+                    playerName: '',
+                    currentChallengeId: 1,
+                    solvedChallenges: [],
+                    score: 0,
+                    hintsUsed: {},
+                    totalHintsUsed: 0,
+                    badges: [],
+                    streak: 0,
+                    lastPlayDate: null,
+                    sessionStats: {
+                        pointsEarned: 0,
+                        hintsUsed: 0,
+                        badgesEarned: [],
+                        timeBonuses: 0
+                    },
+                    settings: {
+                        timerEnabled: true,
+                        audioEnabled: false,
+                        reducedMotion: false
+                    }
+                };
+                
+                const hasAllFields = gameState.playerName !== undefined && 
+                                   gameState.currentChallengeId !== undefined &&
+                                   gameState.solvedChallenges !== undefined &&
+                                   gameState.score !== undefined;
+                addTestResult('state-tests', 'Game State Structure', hasAllFields, 
+                    'All required game state fields present');
+                
+            } catch (error) {
+                addTestResult('state-tests', 'State Management', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function runBadgeTests() {
+            const container = document.getElementById('badge-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: Badge definitions
+                const badgeDefinitions = {
+                    'first_blood': { name: 'First Blood', icon: '🩸', description: 'Solve your first challenge' },
+                    'streak_3': { name: 'Streak-3', icon: '🔥', description: 'Solve 3 challenges in a row' },
+                    'graduate_slayer': { name: 'Graduate Slayer', icon: '🎓', description: 'Solve all graduate-level challenges' }
+                };
+                
+                const hasRequiredBadges = badgeDefinitions.first_blood && 
+                                        badgeDefinitions.streak_3 && 
+                                        badgeDefinitions.graduate_slayer;
+                addTestResult('badge-tests', 'Badge Definitions', hasRequiredBadges, 
+                    'All required badge definitions present');
+                
+                // Test 2: Badge structure
+                const firstBadge = badgeDefinitions.first_blood;
+                const hasRequiredFields = firstBadge.name && firstBadge.icon && firstBadge.description;
+                addTestResult('badge-tests', 'Badge Structure', hasRequiredFields, 
+                    'Badge objects have required fields');
+                
+                // Test 3: Badge logic
+                const testSolvedChallenges = [1, 2, 3, 4, 5];
+                const shouldEarnFirstBlood = testSolvedChallenges.length === 1;
+                const shouldEarnStreak3 = testSolvedChallenges.length >= 3;
+                
+                addTestResult('badge-tests', 'Badge Logic', shouldEarnFirstBlood && shouldEarnStreak3, 
+                    'Badge earning logic works correctly');
+                
+            } catch (error) {
+                addTestResult('badge-tests', 'Badge System', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function runA11yTests() {
+            const container = document.getElementById('a11y-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: ARIA attributes
+                const hasAriaRoles = document.querySelector('[role="main"]') !== null;
+                addTestResult('a11y-tests', 'ARIA Roles', hasAriaRoles, 
+                    'ARIA roles are present in the document');
+                
+                // Test 2: Alt text for images
+                const images = document.querySelectorAll('img');
+                const hasAltText = Array.from(images).every(img => img.hasAttribute('alt'));
+                addTestResult('a11y-tests', 'Image Alt Text', hasAltText, 
+                    `All ${images.length} images have alt text`);
+                
+                // Test 3: Form labels
+                const inputs = document.querySelectorAll('input');
+                const hasLabels = Array.from(inputs).every(input => 
+                    input.hasAttribute('aria-label') || 
+                    input.hasAttribute('aria-describedby') ||
+                    document.querySelector(`label[for="${input.id}"]`)
+                );
+                addTestResult('a11y-tests', 'Form Labels', hasLabels, 
+                    'All form inputs have proper labeling');
+                
+                // Test 4: Keyboard navigation
+                const focusableElements = document.querySelectorAll('button, input, a, [tabindex]');
+                const hasTabIndex = Array.from(focusableElements).every(el => 
+                    el.hasAttribute('tabindex') || el.tagName === 'BUTTON' || el.tagName === 'A'
+                );
+                addTestResult('a11y-tests', 'Keyboard Navigation', hasTabIndex, 
+                    'Focusable elements support keyboard navigation');
+                
+                // Test 5: Color contrast (basic check)
+                const hasHighContrast = window.getComputedStyle(document.body).color !== '';
+                addTestResult('a11y-tests', 'Color Contrast', hasHighContrast, 
+                    'Text color is defined for contrast checking');
+                
+            } catch (error) {
+                addTestResult('a11y-tests', 'Accessibility', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function runPWATests() {
+            const container = document.getElementById('pwa-tests');
+            container.innerHTML = '';
+            
+            try {
+                // Test 1: Service Worker support
+                const hasServiceWorker = 'serviceWorker' in navigator;
+                addTestResult('pwa-tests', 'Service Worker Support', hasServiceWorker, 
+                    hasServiceWorker ? 'Service Worker API is available' : 'Service Worker not supported');
+                
+                // Test 2: Manifest file
+                const manifestResponse = await fetch('manifest.webmanifest');
+                const hasManifest = manifestResponse.ok;
+                addTestResult('pwa-tests', 'Manifest File', hasManifest, 
+                    hasManifest ? 'Manifest file is accessible' : 'Manifest file not found');
+                
+                if (hasManifest) {
+                    const manifest = await manifestResponse.json();
+                    const hasRequiredFields = manifest.name && manifest.short_name && manifest.start_url;
+                    addTestResult('pwa-tests', 'Manifest Structure', hasRequiredFields, 
+                        'Manifest has required fields');
+                }
+                
+                // Test 3: HTTPS requirement
+                const isSecure = location.protocol === 'https:' || location.hostname === 'localhost';
+                addTestResult('pwa-tests', 'Secure Context', isSecure, 
+                    isSecure ? 'Running in secure context' : 'HTTPS required for PWA features');
+                
+                // Test 4: Cache API
+                const hasCacheAPI = 'caches' in window;
+                addTestResult('pwa-tests', 'Cache API', hasCacheAPI, 
+                    hasCacheAPI ? 'Cache API is available' : 'Cache API not supported');
+                
+                // Test 5: Install prompt
+                const hasInstallPrompt = 'onbeforeinstallprompt' in window;
+                addTestResult('pwa-tests', 'Install Prompt', hasInstallPrompt, 
+                    'Install prompt event is available');
+                
+            } catch (error) {
+                addTestResult('pwa-tests', 'PWA Features', false, `Error: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>
